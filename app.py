@@ -17,8 +17,9 @@ def testing_function():
 
 @app.route("/checkPrime")
 def prime():
-
-    x = 192921
+    x = int(request.args.get('numberToCheck'))
+    print(x)
+    print(type(x))
     for i in range(2, x):
         if x % i == 0:
             return "False"
