@@ -1,6 +1,9 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 
 @app.route("/")
@@ -16,11 +19,12 @@ def testing_function():
 
 
 @app.route("/checkPrime")
+@cross_origin()
 def prime():
     x = int(request.args.get('numberToCheck'))
-    print(x)
-    print(type(x))
+    # print(x)
+    # print(type(x))
     for i in range(2, x):
         if x % i == 0:
-            return "False"
-    return "True"
+            return jsonify(answer="False")
+    return jsonify(answer="True")
